@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Romanizer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-900 w-screen min-h-screen flex flex-col justify-center items-center">
+  <div class="w-full max-w-2xl p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-slate-800 border-slate-700">
+    <div>
+      <h1 class="mb-2 text-5xl font-bold text-amber-500 text-center">Romanizer</h1>
+      <h2 class="mb-2 text-xl font-bold text-white text-center">Integer numbers to Roman numerals converter</h2>
+      <div class="mt-10">
+        <label for="number" class="block mb-2 text-sm font-medium text-white">Your number</label>
+        <input id="number" type="number" placeholder="Enter your number here"
+          class="border text-sm rounded-lg block w-full p-2.5 bg-slate-600 border-slate-500 placeholder-slate-400 text-white">
+      </div>
+
+      <button
+        class="mt-6 w-full text-white focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-amber-600 hover:bg-amber-700 focus:ring-amber-800"
+        onclick="romanize()">
+        Convert to Roman numeral
+      </button>
+
+      <div class="mt-12">
+        <label for="roman" class="block mb-2 text-sm font-medium text-white text-center">Your roman numeral</label>
+        <p id="roman" class="mb-2 text-5xl font-bold text-white text-center">...</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script>
+  const stream = new EventSource("/stream");
+  stream.onmessage = function (event) {
+    if (event.data) {
+      document.getElementById("roman").innerHTML = event.data;
+    }
+    else {
+      document.getElementById("roman").innerHTML = '...';
+    }
+  };
+
+  const romanize = () => {
+    let number = document.getElementById("number").value;
+    document.getElementById("roman").innerHTML = "...";
+    fetch(`/romanize?number=${number}`);
+  }
+  romanize(); 
+</script>
+
+</html>
