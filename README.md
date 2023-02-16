@@ -10,6 +10,12 @@ Romanizer is a simple converter made with an Express SSE server.
 npm install
 ```
 
+## Run tests
+
+```
+npm run test
+```
+
 ## Run server
 
 ### Development
