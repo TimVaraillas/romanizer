@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
+    "test": "jest --coverage",
     "dev": "nodemon --watch src -e js,ts,json --exec \"ts-node src/index.ts\"",
     "copy-files": "copyfiles -u 1 src/public/*.html dist/",
     "build": "tsup src/index.ts --format cjs --clean && npm run copy-files",
@@ -21,9 +22,12 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.16",
+    "@types/jest": "^29.4.0",
     "@types/node": "^18.11.18",
     "copyfiles": "^2.4.1",
+    "jest": "^29.4.3",
     "nodemon": "^2.0.20",
+    "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.2",
     "tsup": "^6.5.0",
